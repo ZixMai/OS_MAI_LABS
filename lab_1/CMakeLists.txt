@@ -4,14 +4,14 @@ set(SubProjectName "lab_1")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_library(${SubProjectName}_lib src/child.cpp src/utils.cpp src/utils.h src/parent.cpp)
+add_library(${SubProjectName}_lib src/parent.h main.cpp src/utils.h src/parent.cpp)
 add_executable(${SubProjectName}_parent_exe src/parent.cpp)
 add_executable(${SubProjectName}_child_exe src/child.cpp)
-
-add_dependencies(${SubProjectName}_parent_exe ${SubProjectName}_child_exe)
+add_executable(${SubProjectName}_exe main.cpp)
 
 target_link_libraries(${SubProjectName}_parent_exe PRIVATE ${SubProjectName}_lib)
 target_link_libraries(${SubProjectName}_child_exe PRIVATE ${SubProjectName}_lib)
+target_link_libraries(${SubProjectName}_exe PRIVATE ${SubProjectName}_lib)
 
 add_executable(${SubProjectName}_tests tests/test.cpp)
 target_link_libraries(${SubProjectName}_tests ${SubProjectName}_lib gtest_main)
