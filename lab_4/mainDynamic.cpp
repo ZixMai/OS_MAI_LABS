@@ -87,7 +87,7 @@ int main(int argv, char** argc){
                 }
                 break;
             case 1:
-                handleGcdDynamic(libHandle, isF1 ? "EuclidGcd" : "StandardGcd");
+                handleGcdDynamic(libHandle, isF1 ? "GcdEuclid" : "Gcd");
             break;
             case 2:
                 handlePiDynamic(libHandle, isF1 ? "PiVallis" : "PiLeibniz");
