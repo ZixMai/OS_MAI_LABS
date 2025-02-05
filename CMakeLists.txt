@@ -18,5 +18,6 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(lab_1)
+add_subdirectory(lab_2)
 add_subdirectory(lab_3)
 add_subdirectory(lab_4)
