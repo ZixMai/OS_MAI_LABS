@@ -25,7 +25,7 @@ inline double circle_area_multi_thread(const long long radius, const unsigned in
     std::vector<ThreadWork> work;
     std::vector<pthread_t> threads_array(threads);
 
-    const long long points = radius * radius * radius * radius * threads;
+    const long long points = radius * radius * radius * radius * 16;
     for (size_t i = 0; i < threads; ++i) {
         work.emplace_back(radius, points / threads, 0);
     }
