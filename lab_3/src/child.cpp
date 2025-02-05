@@ -24,10 +24,8 @@ int main(int argc, char *argv[]) {
     auto parentSem = SharedSem(kSemParentName);
     auto childSem = SharedSem(kSemChildName);
 
-    auto parentFile = SharedFile(kParentFilename);
     auto childFile = SharedFile(kChildFilename);
 
-    auto bufferP2C = SharedMem(parentFile.getFd(), kFileLength);
     auto bufferC2P = SharedMem(childFile.getFd(), 4096);
 
     std::string line;
@@ -63,7 +61,9 @@ int main(int argc, char *argv[]) {
 
         parentSem.post();
     }
-    bufferC2P.buffer[0] = two;
+    if (bufferC2P.buffer[0] != zero) {
+        bufferC2P.buffer[0] = two;
+    }
     close(fd);
     parentSem.post();
     return 0;

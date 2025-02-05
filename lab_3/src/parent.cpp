@@ -18,13 +18,11 @@ int parent_main(std::istream& input, std::ostream& output) {
     auto parentSem = SharedSem(kSemParentName);
     auto childSem = SharedSem(kSemChildName);
 
-    auto parentFile = SharedFile(kParentFilename);
     auto childFile = SharedFile(kChildFilename);
 
     const std::string file_name = get_file_name(input);;
     start_process(file_name);
 
-    auto bufferP2C = SharedMem(parentFile.getFd(), kFileLength);
     auto bufferC2P = SharedMem(childFile.getFd(), 4096);
 
     float res;
