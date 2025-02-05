@@ -1,0 +1,59 @@
+zix@zix--ASUSLaptop:/media/zix/WinBuntu/JetBrains_IDEs/clion_projects/OS/lab_4/cmake-build-debug$ ./lab_4_dynamic
+Enter command: 1
+Enter 2 numbers separated by space: 8 4
+Result: 4
+Enter command: 0
+Enter command: 1
+Enter 2 numbers separated by space: 8 4
+Result: 2
+Enter command: 2
+Enter n: 900000
+Result: 3.14135
+Enter command: 0
+Enter command: 2
+Enter n: 900000
+Result: 3.1416
+Enter command: 3
+
+Process finished with exit code 0
+
+zix@zix--ASUSLaptop:/media/zix/WinBuntu/JetBrains_IDEs/clion_projects/OS/lab_4/cmake-build-debug$ strace -p 1862436
+strace: Process 1862436 attached
+read(0, "1\n", 1024)                    = 2
+write(1, "Enter 2 numbers separated by spa"..., 36) = 36
+read(0, "8 4\n", 1024)                  = 4
+write(1, "Result: 4\n", 10)             = 10
+write(1, "Enter command: ", 15)         = 15
+read(0, "0\n", 1024)                    = 2
+openat(AT_FDCWD, "./libf2.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+newfstatat(3, "", {st_mode=S_IFREG|0777, st_size=16736, ...}, AT_EMPTY_PATH) = 0
+getcwd("/media/zix/WinBuntu/JetBrains_IDEs/clion_projects/OS/lab_4/cmake-build-debug", 128) = 77
+mmap(NULL, 16424, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fcf383d1000
+mmap(0x7fcf383d2000, 4096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x7fcf383d2000
+mmap(0x7fcf383d3000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7fcf383d3000
+mmap(0x7fcf383d4000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7fcf383d4000
+close(3)                                = 0
+mprotect(0x7fcf383d4000, 4096, PROT_READ) = 0
+write(1, "Enter command: ", 15)         = 15
+read(0, "1\n", 1024)                    = 2
+write(1, "Enter 2 numbers separated by spa"..., 36) = 36
+read(0, "8 4\n", 1024)                  = 4
+write(1, "Result: 2\n", 10)             = 10
+write(1, "Enter command: ", 15)         = 15
+read(0, "2\n", 1024)                    = 2
+write(1, "Enter n: ", 9)                = 9
+read(0, "900000\n", 1024)               = 7
+write(1, "Result: 3.14135\n", 16)       = 16
+write(1, "Enter command: ", 15)         = 15
+read(0, "0\n", 1024)                    = 2
+write(1, "Enter command: ", 15)         = 15
+read(0, "2\n", 1024)                    = 2
+write(1, "Enter n: ", 9)                = 9
+read(0, "900000\n", 1024)               = 7
+write(1, "Result: 3.1416\n", 15)        = 15
+write(1, "Enter command: ", 15)         = 15
+read(0, "3\n", 1024)                    = 2
+lseek(0, -1, SEEK_CUR)                  = -1 ESPIPE (Недопустимая операция смещения)
+exit_group(0)                           = ?
++++ exited with 0 +++
