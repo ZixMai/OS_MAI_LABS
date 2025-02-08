@@ -21,19 +21,19 @@ inline double circle_area(const long long radius, const unsigned int k) {
     return area;
 }
 
-inline double circle_area_multi_thread(const long long radius, const unsigned int threads) {
+inline double circle_area_multi_thread(const long long radius, const unsigned int k, const unsigned int threads) {
     std::vector<ThreadWork> work;
-    std::vector<pthread_t> threads_array(threads);
+    std::vector<pthread_t> threads_array(k);
 
-    const long long points = radius * radius * radius * radius * 16;
-    for (size_t i = 0; i < threads; ++i) {
-        work.emplace_back(radius, points / threads, 0);
+    const long long points = radius * radius * radius * radius * threads;
+    for (size_t i = 0; i < k; ++i) {
+        work.emplace_back(radius, points / k, 0);
     }
 
     const auto start = std::chrono::high_resolution_clock::now();
 
     //run threads
-    for (size_t i = 0; i < threads; ++i) {
+    for (size_t i = 0; i < k; ++i) {
         pthread_t t;
         if (pthread_create(&t, nullptr, threadRoutine, &work[i]) != 0) {
             std::cerr << "Failed to create thread" << std::endl;
@@ -43,7 +43,7 @@ inline double circle_area_multi_thread(const long long radius, const unsigned in
     }
 
     //waiting all threads
-    for (size_t i = 0; i < threads; ++i) {
+    for (size_t i = 0; i < k; ++i) {
         pthread_join(threads_array[i], nullptr);
     }
 
@@ -57,7 +57,7 @@ inline double circle_area_multi_thread(const long long radius, const unsigned in
     const auto area = (static_cast<double>(total_points) / static_cast<double>(points)) * static_cast<double>(squareArea);
 
     const auto end = std::chrono::high_resolution_clock::now();
-    std::cout << "Микросекунд с " << threads << " потоками: " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << std::endl;
+    std::cout << "Микросекунд с " << k << " потоками: " << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << std::endl;
 
     return area;
 }
